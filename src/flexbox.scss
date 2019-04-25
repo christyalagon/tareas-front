@@ -1,0 +1,57 @@
+@import '~flexboxgrid/css/flexboxgrid';
+
+.col-12 {
+  @extend .col-xs-12;
+  @extend .col-sm-12;
+  @extend .col-md-12;
+  @extend .col-lg-12;
+}
+
+.col-10 {
+  @extend .col-xs-10;
+  @extend .col-sm-10;
+  @extend .col-md-10;
+  @extend .col-lg-10;
+}
+
+.col-8 {
+  @extend .col-xs-8;
+  @extend .col-sm-8;
+  @extend .col-md-8;
+  @extend .col-lg-8;
+}
+
+.col-6 {
+  @extend .col-xs-6;
+  @extend .col-sm-6;
+  @extend .col-md-6;
+  @extend .col-lg-6;
+}
+
+.col-4 {
+  @extend .col-xs-4;
+  @extend .col-sm-4;
+  @extend .col-md-4;
+  @extend .col-lg-4;
+}
+
+.col-2 {
+  @extend .col-xs-2;
+  @extend .col-sm-2;
+  @extend .col-md-2;
+  @extend .col-lg-2;
+}
+
+.center {
+  @extend .center-xs;
+  @extend .center-sm;
+  @extend .center-md;
+  @extend .center-lg;
+}
+
+.middle {
+  @extend .middle-xs;
+  @extend .middle-sm;
+  @extend .middle-md;
+  @extend .middle-lg;
+}

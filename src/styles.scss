@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+@import "themes/tema.scss";
+@import 'flexbox.scss';
+html,
+body,
+app-root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+
+.tituloCentrado {
+    flex: 1 1 auto;
+  }
