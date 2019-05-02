@@ -1,0 +1,55 @@
+<application>
+  <component name="RecentProjectsManager">
+    <option name="recentPaths">
+      <list>
+        <option value="C:/Christian/wks_proyecto/Proyecto_tareas" />
+        <option value="C:/Christian/wks_intellij/dataengineportal" />
+      </list>
+    </option>
+    <option name="openPaths">
+      <list>
+        <option value="C:/Christian/wks_proyecto/Proyecto_tareas" />
+      </list>
+    </option>
+    <option name="lastPath" value="C:/Christian/wks_proyecto/Proyecto_tareas" />
+    <option name="pid" value="" />
+    <option name="additionalInfo">
+      <map>
+        <entry key="C:/Christian/wks_intellij">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-183.5429.30" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1550566943074" />
+              <option name="buildTimestamp" value="1548743190936" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="C:/Christian/wks_intellij/dataengineportal">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-183.6156.11" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1556174750628" />
+              <option name="buildTimestamp" value="1553518702032" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="C:/Christian/wks_proyecto/Proyecto_tareas">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IC-183.6156.11" />
+              <option name="productionCode" value="IC" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1556175407028" />
+              <option name="buildTimestamp" value="1553518702032" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="lastProjectLocation" value="C:/Christian/wks_proyecto" />
+  </component>
+</application>
