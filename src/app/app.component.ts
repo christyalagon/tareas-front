@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
   constructor(private service: TestService) {
   }
   ngOnInit() {
-    this.getDatos()
   }
   getDatos() {
     this.service.getData().subscribe(data => {

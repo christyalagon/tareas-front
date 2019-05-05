@@ -1,5 +1,4 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
+<div>
   <header>
     <mat-toolbar color="primary">
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
@@ -8,38 +7,5 @@
       </span>
     </mat-toolbar>
   </header>
-  <h1>
-    Welcome to {{ title }}
-    <span *ngIf="datos">
-      {{testDatos()}}
-    </span>
-    <button mat-raised-button color="accent" type="button" (click)="aniadirDatos()">
-      Añadir datos
-    </button>
-
-  </h1>
-  <div class="row center">
-    <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
-
-      <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
-        <ng-container matColumnDef="descripcion">
-          <th mat-header-cell *matHeaderCellDef> Descripción </th>
-          <td mat-cell *matCellDef="let element" [routerLink]="['/users/' + element.Id]">{{element.description}}</td>
-        </ng-container>
-        <ng-container matColumnDef="price">
-          <th mat-header-cell *matHeaderCellDef> Precio </th>
-          <td mat-cell *matCellDef="let element" [routerLink]="['/users/' + element.Id]">{{element.price}}</td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-    </div>
-    <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
-      <h2>TESTING FLEX</h2>
-    </div>
-  </div>
-
-  <img width="300" alt="Angular Logo"
-    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+  <router-outlet></router-outlet>
 </div>

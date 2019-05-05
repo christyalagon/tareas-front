@@ -1,0 +1,14 @@
+.login{
+text-align: center;
+    .formulario{
+        display: flex;
+        justify-content: center;
+        width: 400px;
+        margin: auto;
+        margin-top: 3em;
+        flex-wrap: wrap;
+        mat-form-field{
+            width: 100%;
+        }
+    }
+}

@@ -91,7 +91,7 @@
     "radix": true,
     "semicolon": [
       false,
-      "always"
+      "never"
     ],
     "triple-equals": [
       true,

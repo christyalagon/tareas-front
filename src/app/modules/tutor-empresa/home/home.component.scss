@@ -1,0 +1,13 @@
+.row{
+    display: flex;
+    justify-content: space-around;
+}
+.crear{
+    text-align: center;
+    // margin: 5px; 
+    margin-top: 1em;
+    border: 1em solid rgb(236, 233, 233);
+    mat-card-header{
+        justify-content: center;
+    }
+}
