@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/services/login/login.service';
-import { Router } from '@angular/router';
-import { User } from 'src/app/services/login/user';
+import { Component, OnInit } from '@angular/core'
+import { LoginService } from 'src/app/services/login/login.service'
+import { Router } from '@angular/router'
+import { User } from 'src/app/services/login/user'
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.loginService.login(this.username).subscribe(
       data => {
-        console.log(data);
+        console.log(data)
         const user: User = data
         if (data) {
           sessionStorage.setItem('loginId', user.id.toString())
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/tutor-empresa'])
         }
       }
-    );
+    )
   }
 
 }

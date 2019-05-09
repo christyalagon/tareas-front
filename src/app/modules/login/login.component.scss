@@ -3,12 +3,12 @@ text-align: center;
     .formulario{
         display: flex;
         justify-content: center;
-        width: 400px;
+        width: 300px;
         margin: auto;
-        margin-top: 3em;
+        margin-top: 2em;
         flex-wrap: wrap;
         mat-form-field{
-            width: 100%;
+            width: 80%
         }
     }
 }

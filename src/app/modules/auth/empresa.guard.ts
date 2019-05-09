@@ -4,9 +4,10 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 import { Observable } from 'rxjs'
 import { Router } from '@angular/router'
 import { LoginService } from 'src/app/services/login/login.service'
+import { environment } from 'src/environments/environment'
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class EmpresaGuard implements CanActivate {
 
   constructor(
     private loginService: LoginService,
@@ -16,10 +17,10 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (!this.loginService.isLoggedIn()) {
-      this.router.navigate(['/login'])
+    if (sessionStorage.getItem('perfil') === environment.empresaPerfil) {
+      return true
+    } else {
       return false
     }
-    return true
   }
 }

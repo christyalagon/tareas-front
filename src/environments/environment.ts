@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8091',
-};
+  empresaPerfil: '1',
+  profesorPerfil: '0'
+}
 
 /*
  * For easier debugging in development mode, you can import the following file

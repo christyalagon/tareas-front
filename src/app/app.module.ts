@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { TestService } from './services/test/test.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppMaterialModule } from './app-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { LoginComponent } from './modules/login/login.component';
 import { TestComponent } from './modules/test/test.component';
 import { TutorEmpresaModule } from './modules/tutor-empresa/tutor-empresa.module';
+import { TenantHttpInterceptor } from './services/tenant-interceptor';
 
 
 @NgModule({
@@ -32,7 +33,12 @@ import { TutorEmpresaModule } from './modules/tutor-empresa/tutor-empresa.module
     TutorEmpresaModule
 
   ],
-  providers: [TestService],
+  providers: [TestService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TenantHttpInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -244,8 +244,8 @@ DROP TABLE IF EXISTS `tareas`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `tareas` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `codigo_tarea` varchar(255),
-  `descripcion` varchar(255),
+  `codigo_tarea` varchar(255) NOT NULL,
+  `descripcion` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQUE_key` (`codigo_tarea`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

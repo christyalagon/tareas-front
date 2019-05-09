@@ -1,16 +1,17 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home/home.component';
-import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from '../auth/profesor.guard';
-import { TutorEmpresaRoutingModule } from './tutor-empresa-routing.module';
-import { AppMaterialModule } from 'src/app/app-material.module';
-import { CrearTareaComponent } from './crear-tarea/crear-tarea.component';
-import { SharedModule } from 'src/app/shared.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { HomeComponent } from './home/home.component'
+import { Routes, RouterModule } from '@angular/router'
+import { ProfesorGuard } from '../auth/profesor.guard'
+import { TutorEmpresaRoutingModule } from './tutor-empresa-routing.module'
+import { AppMaterialModule } from 'src/app/app-material.module'
+import { CrearTareaComponent, CrearTareaDialog } from './crear-tarea/crear-tarea.component'
+import { SharedModule } from 'src/app/shared.module'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { BrowserModule } from '@angular/platform-browser'
+import { HttpClientModule } from '@angular/common/http'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { EmpresaGuard } from '../auth/empresa.guard'
 
 
 @NgModule({
@@ -25,7 +26,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     RouterModule.forRoot([]),
   ],
-  declarations: [HomeComponent, CrearTareaComponent],
-  providers: [AuthGuard]
+  declarations: [HomeComponent, CrearTareaComponent, CrearTareaDialog],
+  entryComponents: [CrearTareaComponent, CrearTareaDialog],
+  exports: [CrearTareaComponent],
+  providers: [ProfesorGuard, CrearTareaComponent, EmpresaGuard]
 })
 export class TutorEmpresaModule { }
