@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-12 text-center mb-3">
+    <h1>Tareas sin asignar</h1>
+  </div>
+  <div class="col-12">
+
+    <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8 w-100 mb-3"
+      (matSortChange)="sortTable($event)">
+      <ng-container matColumnDef="Codigo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="codigo"> Código </th>
+        <td mat-cell *matCellDef="let element">{{element.codigoTarea}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Descripcion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="descripcion"> Descripción </th>
+        <td mat-cell *matCellDef="let element">{{element.descripcion}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row class="fila" (click)="expression" *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator class="mat-paginator-container" #paginator [pageSize]=10></mat-paginator>
+  </div>
+  <div class="col-12">
+      <ng-template #popContent>Hello, <b>{{name}}</b>!</ng-template>
+      <ng-template #popTitle>Fancy <b>content!!</b></ng-template>
+      <button type="button" class="btn btn-outline-secondary" [ngbPopover]="popContent" [popoverTitle]="popTitle">
+        I've got markup and bindings in my popover!
+      </button>
+  </div>
+</div>

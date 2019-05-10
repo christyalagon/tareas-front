@@ -1,13 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core'
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material'
 import { Observable } from 'rxjs'
 import { AlumnoService } from 'src/app/services/alumnos/alumno.service'
 import { Alumno } from 'src/app/services/alumnos/model/alumno'
 import { log } from 'util'
 import { TareasService } from 'src/app/services/tareas/tareas.service'
 import { Tareas } from 'src/app/services/tareas/model/tareas'
-import { TareaYAlumno } from 'src/app/services/tareas/model/tareaYAlumno';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TareaYAlumno } from 'src/app/services/tareas/model/tareaYAlumno'
+import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms'
 
 @Component({
   selector: 'app-crear-tarea',
@@ -26,7 +26,8 @@ export class CrearTareaDialog implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public alumnosService: AlumnoService,
     public tareasService: TareasService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    public snackBar: MatSnackBar) { }
   ngOnInit() {
     // tslint:disable-next-line:radix
     const tutorId = parseInt(sessionStorage.getItem('loginId'))
@@ -47,35 +48,45 @@ export class CrearTareaDialog implements OnInit {
     })
   }
 
-  get fControls() { return this.tareaForm.controls }
-
-  guardado(cerrar?: boolean) {
+  submitForm(formData: any, formDirective: FormGroupDirective, cerrar?: boolean) {
     if (!this.tareaForm.invalid) {
-
-      if (this.codigoAlumno == null) {
-        console.log(this.tarea)
-        let tareaNueva: Tareas
-        tareaNueva = JSON.parse(JSON.stringify(this.tareaForm.getRawValue()))
+      if (this.tareaForm.value.CodigoAlumno == null) {
+        const tareaNueva: Tareas = new Tareas
+        tareaNueva.codigoTarea = this.tareaForm.value.CodigoTarea
+        tareaNueva.descripcion = this.tareaForm.value.Descripcion
         this.tareasService.addTareaSinAlumno(tareaNueva).subscribe(data => {
+          this.snackBar.open('CORRECTO', 'Tarea creada con éxito', { duration: 8000, verticalPosition: 'top' })
           if (cerrar) {
             this.dialogRef.close()
           } else {
             this.tarea = new Tareas
             this.codigoAlumno = null
+            formDirective.resetForm()
+            this.tareaForm.reset()
+            this.createFormGroup()
           }
         }, error => {
-          console.log(error)
+          this.snackBar.open('ERROR', 'Error al guardar la tarea', { duration: 8000, verticalPosition: 'top' })
         })
 
       } else {
-        let tareaNueva: TareaYAlumno
-        tareaNueva = JSON.parse(JSON.stringify(this.tareaForm.getRawValue()))
+        const tareaNueva: TareaYAlumno = new TareaYAlumno
+        tareaNueva.codigoTarea = this.tareaForm.value.CodigoTarea
+        tareaNueva.descripcion = this.tareaForm.value.Descripcion
+        tareaNueva.codigoAlumno = this.tareaForm.value.CodigoAlumno
         this.tareasService.addTareaConAlumno(tareaNueva).subscribe(data => {
+          this.snackBar.open('CORRECTO', 'Tarea creada con éxito', { duration: 8000, verticalPosition: 'top' })
           if (cerrar) {
             this.dialogRef.close()
+          } else {
+            this.tarea = new Tareas
+            this.codigoAlumno = null
+            formDirective.resetForm()
+            this.tareaForm.reset()
+            this.createFormGroup()
           }
         }, error => {
-          console.log(error)
+          this.snackBar.open('ERROR', 'Error al guardar la tarea', { duration: 8000, verticalPosition: 'top' })
         })
 
       }

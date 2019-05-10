@@ -18,4 +18,7 @@ export class TareasService {
   addTareaConAlumno(tarea: TareaYAlumno): Observable<Tareas> {
     return this.http.post<Tareas>(environment.apiUrl + '/tareas/nueva/alumno', tarea)
   }
+  listadoTareasSinAsignar(): Observable<Tareas[]> {
+    return this.http.get<Tareas[]>(environment.apiUrl + '/tareas/listado/asignacion')
+  }
 }
