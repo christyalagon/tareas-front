@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-12 text-center mb-3">
+    <h1>Tareas sin asignar</h1>
+  </div>
+  <div class="col-12 divTabla">
+
+    <table class="table text-center m-2">
+      <thead>
+        <tr>
+          <th>
+            Código
+          </th>
+          <th>
+            Descripción
+          </th>
+          <th>
+            Alumno
+          </th>
+          <th>
+            Nota
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="fila" *ngFor="let tarea of tareas">
+          <td>{{tarea.codigoTarea}}</td>
+          <td>{{tarea.descripcion}}</td>
+          <td>
+            {{tarea.alumno}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-6 d-flex ml-auto mr-auto mt-2 p-5">
+    <button class="btn btn-primary w-100" (click)="guardar()">GUARDAR</button>
+  </div>
+  <div class="col-6 d-flex ml-auto mr-auto mt-2 p-5">
+    <button class="btn btn-primary w-100" (click)="onNoClick()">CANCELAR</button>
+  </div>
+</div>

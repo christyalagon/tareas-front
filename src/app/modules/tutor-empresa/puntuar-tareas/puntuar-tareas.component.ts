@@ -3,19 +3,17 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatTableDataSour
 import { Observable } from 'rxjs'
 import { AlumnoService } from 'src/app/services/alumnos/alumno.service'
 import { Alumno } from 'src/app/services/alumnos/model/alumno'
-import { log } from 'util'
 import { TareasService } from 'src/app/services/tareas/tareas.service'
 import { Tareas } from 'src/app/services/tareas/model/tareas'
 import { TareaYAlumno } from 'src/app/services/tareas/model/tareaYAlumno'
-import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms'
 
 @Component({
-  selector: 'app-asignar-tareas',
-  templateUrl: './asignar-tareas.component.html',
-  styleUrls: ['./asignar-tareas.component.scss']
+  selector: 'app-puntuar-tareas',
+  templateUrl: './puntuar-tareas.component.html',
+  styleUrls: ['./puntuar-tareas.component.scss']
 })
 // tslint:disable-next-line:component-class-suffix
-export class AsignarTareaDialog implements OnInit {
+export class PuntuarTareaDialog implements OnInit {
   alumnos: Alumno[]
   tareas: Tareas[]
   tarea: Tareas = new Tareas
@@ -23,7 +21,7 @@ export class AsignarTareaDialog implements OnInit {
   codigoAlumno: string = null
 
   constructor(
-    public dialogRef: MatDialogRef<AsignarTareaDialog>,
+    public dialogRef: MatDialogRef<PuntuarTareaDialog>,
     public alumnosService: AlumnoService,
     public tareasService: TareasService,
     public snackBar: MatSnackBar) { }
@@ -60,7 +58,7 @@ export class AsignarTareaDialog implements OnInit {
   compare(is1: number | string | Date, is2: number | string | Date, isAsc: boolean) {
     return (is1 < is2 ? -1 : 1) * (isAsc ? 1 : -1)
   }
-  selectAlumno(codigoAlumno, tarea: Tareas) {
+  puntuarTarea(codigoAlumno, tarea: Tareas) {
     console.log(codigoAlumno)
     if (codigoAlumno !== 'null') {
       console.log('codigoAlumno')
@@ -84,15 +82,15 @@ export class AsignarTareaDialog implements OnInit {
   }
 }
 @Component({
-  selector: 'app-asignar-tareas',
+  selector: 'app-puntuar-tareas',
   template: ''
 })
-export class AsignarTareasComponent {
+export class PuntuarTareasComponent {
   anyo: number
   constructor(public dialog: MatDialog) { }
 
   public open(): Observable<any> {
-    const dialogRef = this.dialog.open(AsignarTareaDialog, {
+    const dialogRef = this.dialog.open(PuntuarTareaDialog, {
       width: '700px',
       height: '600px'
     })
@@ -100,3 +98,4 @@ export class AsignarTareasComponent {
   }
 
 }
+
