@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { CrearTareaComponent } from '../crear-tarea/crear-tarea.component';
-import { AsignarTareasComponent } from '../asignar-tareas/asignar-tareas.component';
+import { Component, OnInit } from '@angular/core'
+import { CrearTareaComponent } from '../crear-tarea/crear-tarea.component'
+import { AsignarTareasComponent } from '../asignar-tareas/asignar-tareas.component'
+import { PuntuarTareasComponent } from '../puntuar-tareas/puntuar-tareas.component'
 
 @Component({
   selector: 'app-home',
@@ -10,10 +11,10 @@ import { AsignarTareasComponent } from '../asignar-tareas/asignar-tareas.compone
 export class HomeComponent implements OnInit {
 
   constructor(private crearTareaDialog: CrearTareaComponent,
-    private asginarTareaDialog: AsignarTareasComponent) { }
+    private asginarTareaDialog: AsignarTareasComponent,
+    private puntuarDialog: PuntuarTareasComponent) { }
 
   ngOnInit() {
-    console.log('HOME')
   }
   crearTarea() {
     this.crearTareaDialog.open().subscribe(result => {
@@ -21,6 +22,10 @@ export class HomeComponent implements OnInit {
   }
   asignarTareas() {
     this.asginarTareaDialog.open().subscribe(result => {
+    })
+  }
+  puntuarTareas() {
+    this.puntuarDialog.open().subscribe(result => {
     })
   }
 

@@ -22,11 +22,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="fila" *ngFor="let tarea of tareas">
+        <tr class="fila" *ngFor="let tarea of tareasConAlumno">
           <td>{{tarea.codigoTarea}}</td>
           <td>{{tarea.descripcion}}</td>
           <td>
-            {{tarea.alumno}}
+            {{tarea.nombreAlumno}}
+          </td>
+          <td>
+            <input type="number" max="10" min="0" class="form-control" placeholder="Nota" (blur)="valorar(tarea)" [(ngModel)]="tarea.nota">
           </td>
         </tr>
       </tbody>

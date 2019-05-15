@@ -54,8 +54,6 @@ export class AsignarTareaDialog implements OnInit {
         }
       }
     })
-    this.dataSource = new MatTableDataSource(this.tareas)
-    this.dataSource.paginator = this.paginator
   }
   compare(is1: number | string | Date, is2: number | string | Date, isAsc: boolean) {
     return (is1 < is2 ? -1 : 1) * (isAsc ? 1 : -1)
@@ -79,8 +77,11 @@ export class AsignarTareaDialog implements OnInit {
 
   guardar() {
     console.log(this.tareasModificadas)
-    this.tareasService.asignacionTareasListado(this.tareasModificadas).subscribe()
-    this.onNoClick()
+    this.tareasService.asignacionTareasListado(this.tareasModificadas).subscribe(
+      data => this.onNoClick(),
+      error => this.snackBar.open('ERROR', 'Error al asignar las tareas', { duration: 8000, verticalPosition: 'top' })
+    )
+
   }
 }
 @Component({

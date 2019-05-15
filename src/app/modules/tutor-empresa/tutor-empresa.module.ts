@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { EmpresaGuard } from '../auth/empresa.guard'
 import { AsignarTareasComponent, AsignarTareaDialog } from './asignar-tareas/asignar-tareas.component'
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap'
+import { PuntuarTareasComponent, PuntuarTareaDialog } from './puntuar-tareas/puntuar-tareas.component';
 
 @NgModule({
   imports: [
@@ -28,9 +29,11 @@ import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap'
     RouterModule.forRoot([]),
     NgbPopoverModule
   ],
-  declarations: [HomeComponent, CrearTareaComponent, CrearTareaDialog, AsignarTareasComponent, AsignarTareaDialog],
-  entryComponents: [CrearTareaComponent, CrearTareaDialog, AsignarTareasComponent, AsignarTareaDialog],
-  exports: [CrearTareaComponent, AsignarTareasComponent],
-  providers: [ProfesorGuard, CrearTareaComponent, EmpresaGuard, AsignarTareasComponent]
+  declarations: [HomeComponent, CrearTareaComponent, CrearTareaDialog, AsignarTareasComponent,
+    AsignarTareaDialog, PuntuarTareaDialog, PuntuarTareasComponent],
+  entryComponents: [CrearTareaComponent, CrearTareaDialog, AsignarTareasComponent,
+    AsignarTareaDialog, PuntuarTareasComponent, PuntuarTareaDialog],
+  exports: [CrearTareaComponent, AsignarTareasComponent, PuntuarTareasComponent],
+  providers: [ProfesorGuard, CrearTareaComponent, EmpresaGuard, AsignarTareasComponent, PuntuarTareasComponent]
 })
 export class TutorEmpresaModule { }

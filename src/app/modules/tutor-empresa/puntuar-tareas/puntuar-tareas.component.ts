@@ -6,6 +6,7 @@ import { Alumno } from 'src/app/services/alumnos/model/alumno'
 import { TareasService } from 'src/app/services/tareas/tareas.service'
 import { Tareas } from 'src/app/services/tareas/model/tareas'
 import { TareaYAlumno } from 'src/app/services/tareas/model/tareaYAlumno'
+import { TareaYAlumnoNombre } from 'src/app/services/tareas/model/tareaYAlumnoNombre';
 
 @Component({
   selector: 'app-puntuar-tareas',
@@ -17,7 +18,8 @@ export class PuntuarTareaDialog implements OnInit {
   alumnos: Alumno[]
   tareas: Tareas[]
   tarea: Tareas = new Tareas
-  tareasModificadas: TareaYAlumno[] = []
+  tareasConAlumno: TareaYAlumnoNombre[] = []
+  tareasModificadas: TareaYAlumnoNombre[] = []
   codigoAlumno: string = null
 
   constructor(
@@ -28,58 +30,39 @@ export class PuntuarTareaDialog implements OnInit {
   ngOnInit() {
     // tslint:disable-next-line:radix
     const tutorId = parseInt(sessionStorage.getItem('loginId'))
-    this.tareasService.listadoTareasSinAsignar().subscribe(data => {
-      this.tareas = data
-      this.alumnosService.listadoPorTutor(tutorId).subscribe(alumnos => {
-        this.alumnos = alumnos
-        console.log(this.alumnos)
-      })
+    this.tareasService.listadoTareasConAsignacion().subscribe(data => {
+      this.tareasConAlumno = data
+      console.log(this.tareasConAlumno)
     })
   }
   onNoClick(): void {
     this.dialogRef.close()
   }
-
-  sortTable(sort: Sort) {
-    this.tareas = this.tareas.sort((t1, t2) => {
-      const isAsc = sort.direction === 'asc'
-      switch (sort.active) {
-        case 'codigo': {
-          return this.compare(t1.codigoTarea, t2.codigoTarea, isAsc)
-        }
-        case 'descripcion': {
-          return this.compare(t1.descripcion, t2.descripcion, isAsc)
-        }
-      }
-    })
-    this.dataSource = new MatTableDataSource(this.tareas)
-    this.dataSource.paginator = this.paginator
-  }
-  compare(is1: number | string | Date, is2: number | string | Date, isAsc: boolean) {
-    return (is1 < is2 ? -1 : 1) * (isAsc ? 1 : -1)
-  }
-  puntuarTarea(codigoAlumno, tarea: Tareas) {
-    console.log(codigoAlumno)
-    if (codigoAlumno !== 'null') {
-      console.log('codigoAlumno')
-      const modTarea: TareaYAlumno = new TareaYAlumno
-      modTarea.idTarea = tarea.id
-      modTarea.codigoTarea = tarea.codigoTarea
-      modTarea.descripcion = tarea.descripcion
-      modTarea.codigoAlumno = codigoAlumno
-      this.tareasModificadas = this.tareasModificadas.filter(x => x.codigoTarea !== tarea.codigoTarea)
-      this.tareasModificadas.push(modTarea)
-    } else {
-      console.log('borrado')
-      this.tareasModificadas = this.tareasModificadas.filter(x => x.codigoTarea !== tarea.codigoTarea)
+  valorar(tarea: TareaYAlumnoNombre) {
+    console.log(tarea.nota)
+    if (tarea.nota > 10) {
+      tarea.nota = 10
+    } else if (tarea.nota < 0) {
+      tarea.nota = 0
+    } else if (tarea.nota == null) {
+      tarea.nota = 0
     }
   }
 
   guardar() {
-    console.log(this.tareasModificadas)
-    this.tareasService.asignacionTareasListado(this.tareasModificadas).subscribe()
-    this.onNoClick()
+    this.tareasConAlumno.forEach(tarea => {
+      if (tarea.nota != null) {
+        this.tareasModificadas.push(tarea)
+      }
+    })
+    this.tareasService.puntuarTareas(this.tareasModificadas).subscribe(
+      data => {
+        console.log('EXITO')
+        this.onNoClick()
+      }
+    )
   }
+
 }
 @Component({
   selector: 'app-puntuar-tareas',
