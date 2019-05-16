@@ -1,15 +1,25 @@
 .fila:hover {
-    cursor: pointer;
-    background-color: #e9f1e9;
+  cursor: pointer;
+  background-color: #e9f1e9;
+}
+
+thead {
+  background-color: rgb(96, 196, 96);
+}
+
+td {
+  max-width: 100px;
+}
+
+.divTabla {
+  max-height: 400px;
+  overflow: auto;
+}
+
+.notaColumn {
+  min-width: 80px;
+  input{
+    width: 80%;
+    margin: auto;
   }
-  thead {
-    background-color: rgb(96, 196, 96);
-  }
-  td {
-    max-width: 100px;
-  }
-  .divTabla {
-    max-height: 400px;
-    overflow: auto;
-  }
-  
+}

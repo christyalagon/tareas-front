@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-12 text-center mb-3">
-    <h1>Tareas sin asignar</h1>
+    <h1>Puntuar tareas</h1>
   </div>
   <div class="col-12 divTabla">
 
-    <table class="table text-center m-2">
+    <table class="table text-center m-2" *ngIf="tareasConAlumno.length > 0; else noTareas">
       <thead>
         <tr>
           <th>
@@ -28,14 +28,20 @@
           <td>
             {{tarea.nombreAlumno}}
           </td>
-          <td>
-            <input type="number" max="10" min="0" class="form-control" placeholder="Nota" (blur)="valorar(tarea)" [(ngModel)]="tarea.nota">
+          <td class="notaColumn">
+            <input type="number" max="10" min="0" class="form-control" placeholder="Nota" (blur)="valorar(tarea)"
+              [(ngModel)]="tarea.nota">
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-  <div class="col-6 d-flex ml-auto mr-auto mt-2 p-5">
+  <ng-template #noTareas>
+    <div class="col-12 text-center">
+      <h4>No existen tareas sin puntuar..</h4>
+    </div>
+  </ng-template>
+  <div class="col-6 d-flex ml-auto mr-auto mt-2 p-5" *ngIf="tareasConAlumno.length > 0">
     <button class="btn btn-primary w-100" (click)="guardar()">GUARDAR</button>
   </div>
   <div class="col-6 d-flex ml-auto mr-auto mt-2 p-5">

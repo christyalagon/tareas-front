@@ -1,13 +1,12 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core'
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatTableDataSource, MatPaginator, Sort } from '@angular/material'
+import { Component, OnInit } from '@angular/core'
+import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material'
 import { Observable } from 'rxjs'
 import { AlumnoService } from 'src/app/services/alumnos/alumno.service'
 import { Alumno } from 'src/app/services/alumnos/model/alumno'
-import { log } from 'util'
 import { TareasService } from 'src/app/services/tareas/tareas.service'
 import { Tareas } from 'src/app/services/tareas/model/tareas'
 import { TareaYAlumno } from 'src/app/services/tareas/model/tareaYAlumno'
-import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms'
+import { CrearTareaComponent } from '../crear-tarea/crear-tarea.component'
 
 @Component({
   selector: 'app-asignar-tareas',
@@ -17,7 +16,7 @@ import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular
 // tslint:disable-next-line:component-class-suffix
 export class AsignarTareaDialog implements OnInit {
   alumnos: Alumno[]
-  tareas: Tareas[]
+  tareas: Tareas[] = []
   tarea: Tareas = new Tareas
   tareasModificadas: TareaYAlumno[] = []
   codigoAlumno: string = null
@@ -26,7 +25,8 @@ export class AsignarTareaDialog implements OnInit {
     public dialogRef: MatDialogRef<AsignarTareaDialog>,
     public alumnosService: AlumnoService,
     public tareasService: TareasService,
-    public snackBar: MatSnackBar) { }
+    public snackBar: MatSnackBar,
+    private crearTareaDialog: CrearTareaComponent) { }
   ngOnInit() {
     // tslint:disable-next-line:radix
     const tutorId = parseInt(sessionStorage.getItem('loginId'))
@@ -34,7 +34,6 @@ export class AsignarTareaDialog implements OnInit {
       this.tareas = data
       this.alumnosService.listadoPorTutor(tutorId).subscribe(alumnos => {
         this.alumnos = alumnos
-        console.log(this.alumnos)
       })
     })
   }
@@ -42,26 +41,8 @@ export class AsignarTareaDialog implements OnInit {
     this.dialogRef.close()
   }
 
-  sortTable(sort: Sort) {
-    this.tareas = this.tareas.sort((t1, t2) => {
-      const isAsc = sort.direction === 'asc'
-      switch (sort.active) {
-        case 'codigo': {
-          return this.compare(t1.codigoTarea, t2.codigoTarea, isAsc)
-        }
-        case 'descripcion': {
-          return this.compare(t1.descripcion, t2.descripcion, isAsc)
-        }
-      }
-    })
-  }
-  compare(is1: number | string | Date, is2: number | string | Date, isAsc: boolean) {
-    return (is1 < is2 ? -1 : 1) * (isAsc ? 1 : -1)
-  }
   selectAlumno(codigoAlumno, tarea: Tareas) {
-    console.log(codigoAlumno)
     if (codigoAlumno !== 'null') {
-      console.log('codigoAlumno')
       const modTarea: TareaYAlumno = new TareaYAlumno
       modTarea.idTarea = tarea.id
       modTarea.codigoTarea = tarea.codigoTarea
@@ -70,18 +51,28 @@ export class AsignarTareaDialog implements OnInit {
       this.tareasModificadas = this.tareasModificadas.filter(x => x.codigoTarea !== tarea.codigoTarea)
       this.tareasModificadas.push(modTarea)
     } else {
-      console.log('borrado')
       this.tareasModificadas = this.tareasModificadas.filter(x => x.codigoTarea !== tarea.codigoTarea)
     }
   }
 
   guardar() {
-    console.log(this.tareasModificadas)
     this.tareasService.asignacionTareasListado(this.tareasModificadas).subscribe(
-      data => this.onNoClick(),
+      data => {
+        if (this.tareasModificadas.length > 1) {
+          this.snackBar.open('CORRECTO', 'Tareas asignadas con éxito', { duration: 8000, verticalPosition: 'top' })
+        } else if (this.tareasModificadas.length === 1) {
+
+          this.snackBar.open('CORRECTO', 'Tarea asignada con éxito', { duration: 8000, verticalPosition: 'top' })
+        }
+        this.onNoClick()
+      },
       error => this.snackBar.open('ERROR', 'Error al asignar las tareas', { duration: 8000, verticalPosition: 'top' })
     )
-
+  }
+  crearTareas() {
+    this.onNoClick()
+    this.crearTareaDialog.open().subscribe(result => {
+    })
   }
 }
 @Component({
@@ -95,7 +86,8 @@ export class AsignarTareasComponent {
   public open(): Observable<any> {
     const dialogRef = this.dialog.open(AsignarTareaDialog, {
       width: '700px',
-      height: '600px'
+      height: '600px',
+      maxHeight: '100vh'
     })
     return dialogRef.afterClosed()
   }

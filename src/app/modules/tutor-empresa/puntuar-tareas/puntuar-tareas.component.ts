@@ -6,7 +6,7 @@ import { Alumno } from 'src/app/services/alumnos/model/alumno'
 import { TareasService } from 'src/app/services/tareas/tareas.service'
 import { Tareas } from 'src/app/services/tareas/model/tareas'
 import { TareaYAlumno } from 'src/app/services/tareas/model/tareaYAlumno'
-import { TareaYAlumnoNombre } from 'src/app/services/tareas/model/tareaYAlumnoNombre';
+import { TareaYAlumnoNombre } from 'src/app/services/tareas/model/tareaYAlumnoNombre'
 
 @Component({
   selector: 'app-puntuar-tareas',
@@ -32,7 +32,6 @@ export class PuntuarTareaDialog implements OnInit {
     const tutorId = parseInt(sessionStorage.getItem('loginId'))
     this.tareasService.listadoTareasConAsignacion().subscribe(data => {
       this.tareasConAlumno = data
-      console.log(this.tareasConAlumno)
     })
   }
   onNoClick(): void {
@@ -57,7 +56,12 @@ export class PuntuarTareaDialog implements OnInit {
     })
     this.tareasService.puntuarTareas(this.tareasModificadas).subscribe(
       data => {
-        console.log('EXITO')
+        if (this.tareasModificadas.length > 1) {
+          this.snackBar.open('CORRECTO', 'Tareas puntuadas con éxito', { duration: 8000, verticalPosition: 'top' })
+        } else if (this.tareasModificadas.length === 1) {
+
+          this.snackBar.open('CORRECTO', 'Tarea puntuada con éxito', { duration: 8000, verticalPosition: 'top' })
+        }
         this.onNoClick()
       }
     )
@@ -75,7 +79,8 @@ export class PuntuarTareasComponent {
   public open(): Observable<any> {
     const dialogRef = this.dialog.open(PuntuarTareaDialog, {
       width: '700px',
-      height: '600px'
+      height: '600px',
+      maxHeight: '100vh'
     })
     return dialogRef.afterClosed()
   }

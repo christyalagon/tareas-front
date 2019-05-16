@@ -23,7 +23,13 @@ export class LoginComponent implements OnInit {
         if (data) {
           sessionStorage.setItem('loginId', user.id.toString())
           sessionStorage.setItem('perfil', user.perfil)
-          this.router.navigate(['/tutor-empresa'])
+          if (user.perfil === '1') {
+
+            this.router.navigate(['/tutor-empresa'])
+          } else if (user.perfil === '0') {
+            this.router.navigate(['/tutor-centro'])
+
+          }
         }
       }
     )

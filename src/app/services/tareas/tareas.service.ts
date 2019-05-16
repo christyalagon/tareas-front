@@ -4,7 +4,7 @@ import { Observable } from 'rxjs'
 import { environment } from 'src/environments/environment'
 import { Tareas } from './model/tareas'
 import { TareaYAlumno } from './model/tareaYAlumno'
-import { TareaYAlumnoNombre } from './model/tareaYAlumnoNombre';
+import { TareaYAlumnoNombre } from './model/tareaYAlumnoNombre'
 
 @Injectable({
   providedIn: 'root'

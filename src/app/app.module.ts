@@ -15,6 +15,7 @@ import { TutorEmpresaModule } from './modules/tutor-empresa/tutor-empresa.module
 import { TenantHttpInterceptor } from './services/tenant-interceptor'
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
+import { TutorCentroModule } from './modules/tutor-centro/tutor-centro.module'
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
     RouterModule.forRoot([]),
     AppRoutingModule,
     TutorEmpresaModule,
-    NgbModule
+    NgbModule,
+    TutorCentroModule
   ],
   providers: [TestService,
     {

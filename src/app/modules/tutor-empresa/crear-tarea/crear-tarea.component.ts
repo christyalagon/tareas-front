@@ -104,7 +104,8 @@ export class CrearTareaComponent {
   public open(): Observable<any> {
     const parametro = false
     const dialogRef = this.dialog.open(CrearTareaDialog, {
-      width: '700px'
+      width: '700px',
+      maxHeight: '100vh',
     })
     return dialogRef.afterClosed()
   }
