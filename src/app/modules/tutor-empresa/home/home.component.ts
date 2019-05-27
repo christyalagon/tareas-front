@@ -28,5 +28,8 @@ export class HomeComponent implements OnInit {
     this.puntuarDialog.open().subscribe(result => {
     })
   }
+  listarNotas(){
+    
+  }
 
 }

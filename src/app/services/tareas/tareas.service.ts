@@ -32,4 +32,8 @@ export class TareasService {
     const tutorId = sessionStorage.getItem('loginId')
     return this.http.get<TareaYAlumnoNombre[]>(environment.apiUrl + '/tareas/puntuar/' + tutorId)
   }
+  listadoNotasPorTutorEmpresaId(): Observable<TareaYAlumnoNombre[]> {
+    const tutorId = sessionStorage.getItem('loginId')
+    return this.http.get<TareaYAlumnoNombre[]>(environment.apiUrl + '/tareas/listado/notasPorTutorEmpresa/' + tutorId)
+  }
 }

@@ -38,12 +38,13 @@ export class CrearTareaDialog implements OnInit {
     })
   }
   onNoClick(): void {
+    console.log('close')
     this.dialogRef.close()
   }
   createFormGroup() {
     this.tareaForm = this.formBuilder.group({
-      CodigoTarea: [this.tarea.codigoTarea, Validators.required],
-      Descripcion: [this.tarea.descripcion, Validators.required],
+      CodigoTarea: [this.tarea.codigoTarea, [Validators.required, Validators.maxLength(3)]],
+      Descripcion: [this.tarea.descripcion, [Validators.required, Validators.maxLength(80)]],
       CodigoAlumno: [this.codigoAlumno]
     })
   }
