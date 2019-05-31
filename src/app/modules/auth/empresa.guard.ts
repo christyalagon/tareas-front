@@ -10,7 +10,6 @@ import { environment } from 'src/environments/environment'
 export class EmpresaGuard implements CanActivate {
 
   constructor(
-    private loginService: LoginService,
     private router: Router
   ) {}
 
@@ -20,6 +19,11 @@ export class EmpresaGuard implements CanActivate {
     if (sessionStorage.getItem('perfil') === environment.empresaPerfil) {
       return true
     } else {
+      if (sessionStorage.getItem('perfil') === environment.profesorPerfil) {
+        this.router.navigate(['/tutor-centro'])
+      } else {
+        this.router.navigate(['/login'])
+      }
       return false
     }
   }

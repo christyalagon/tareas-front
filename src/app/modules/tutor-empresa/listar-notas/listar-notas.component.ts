@@ -40,7 +40,7 @@ export class ListarNotasComponent {
   constructor(public dialog: MatDialog) { }
 
   public open(): Observable<any> {
-    const dialogRef = this.dialog.open(AsignarTareaDialog, {
+    const dialogRef = this.dialog.open(ListarNotasDialog, {
       width: '700px',
       height: '600px',
       maxHeight: '100vh'

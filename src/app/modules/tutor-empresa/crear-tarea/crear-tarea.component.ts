@@ -20,7 +20,7 @@ export class CrearTareaDialog implements OnInit {
   tarea: Tareas = new Tareas
   codigoAlumno: string = null
   tareaForm: FormGroup
-
+  cerrar: Boolean = false
   constructor(
     public dialogRef: MatDialogRef<CrearTareaDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -50,6 +50,8 @@ export class CrearTareaDialog implements OnInit {
   }
 
   submitForm(formData: any, formDirective: FormGroupDirective, cerrar?: boolean) {
+    console.log('cerrar')
+    console.log(cerrar)
     if (!this.tareaForm.invalid) {
       if (this.tareaForm.value.CodigoAlumno == null) {
         const tareaNueva: Tareas = new Tareas

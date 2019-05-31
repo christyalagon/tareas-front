@@ -4,7 +4,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 import { Observable } from 'rxjs'
 import { Router } from '@angular/router'
 import { LoginService } from 'src/app/services/login/login.service'
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment'
 
 @Injectable()
 export class ProfesorGuard implements CanActivate {
@@ -12,7 +12,7 @@ export class ProfesorGuard implements CanActivate {
   constructor(
     private loginService: LoginService,
     private router: Router
-  ) {}
+  ) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -20,6 +20,11 @@ export class ProfesorGuard implements CanActivate {
     if (sessionStorage.getItem('perfil') === environment.profesorPerfil) {
       return true
     } else {
+      if (sessionStorage.getItem('perfil') === environment.empresaPerfil) {
+        this.router.navigate(['/tutor-empresa'])
+      } else {
+        this.router.navigate(['/login'])
+      }
       return false
     }
   }

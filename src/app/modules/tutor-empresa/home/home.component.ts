@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { CrearTareaComponent } from '../crear-tarea/crear-tarea.component'
 import { AsignarTareasComponent } from '../asignar-tareas/asignar-tareas.component'
 import { PuntuarTareasComponent } from '../puntuar-tareas/puntuar-tareas.component'
+import { ListarNotasComponent } from '../listar-notas/listar-notas.component';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private crearTareaDialog: CrearTareaComponent,
     private asginarTareaDialog: AsignarTareasComponent,
-    private puntuarDialog: PuntuarTareasComponent) { }
+    private puntuarDialog: PuntuarTareasComponent,
+    private listarDialog: ListarNotasComponent) { }
 
   ngOnInit() {
   }
@@ -29,7 +31,8 @@ export class HomeComponent implements OnInit {
     })
   }
   listarNotas(){
-    
+    this.listarDialog.open().subscribe(result => {
+    })
   }
 
 }

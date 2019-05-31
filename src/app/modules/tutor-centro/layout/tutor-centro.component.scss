@@ -1,0 +1,17 @@
+.row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.crear {
+  text-align: center;
+  margin-top: 1em;
+  mat-card-header {
+    justify-content: center;
+  }
+}
+
+.crear:hover {
+  cursor: pointer;
+  background-color: rgb(170, 219, 182);
+}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { LoginService } from 'src/app/services/login/login.service'
 import { Router } from '@angular/router'
 import { User } from 'src/app/services/login/user'
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,8 @@ import { User } from 'src/app/services/login/user'
 export class LoginComponent implements OnInit {
   username: string
   constructor(private loginService: LoginService,
-    private router: Router) { }
+    private router: Router,
+    public snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -19,18 +21,25 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.username).subscribe(
       data => {
         console.log(data)
-        const user: User = data
-        if (data) {
-          sessionStorage.setItem('loginId', user.id.toString())
-          sessionStorage.setItem('perfil', user.perfil)
-          if (user.perfil === '1') {
+        if (data != null) {
+          const user: User = data
+          if (data) {
+            sessionStorage.setItem('loginId', user.id.toString())
+            sessionStorage.setItem('perfil', user.perfil)
+            if (user.perfil === '1') {
 
-            this.router.navigate(['/tutor-empresa'])
-          } else if (user.perfil === '0') {
-            this.router.navigate(['/tutor-centro'])
+              this.router.navigate(['/tutor-empresa'])
+            } else if (user.perfil === '0') {
+              this.router.navigate(['/tutor-centro'])
 
+            }
           }
+        } else {
+          this.snackBar.open('ERROR', 'No existe ese nombre de usuario', { duration: 8000, verticalPosition: 'top' })
         }
+      },
+      error => {
+        this.snackBar.open('ERROR', 'No es posible realizar el login', { duration: 8000, verticalPosition: 'top' })
       }
     )
   }

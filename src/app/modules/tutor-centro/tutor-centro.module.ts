@@ -7,9 +7,9 @@ import { HttpClientModule } from '@angular/common/http'
 import { AppMaterialModule } from 'src/app/app-material.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterModule } from '@angular/router'
-import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap'
 import { TutorCentroComponent } from './layout/tutor-centro.component'
-import { AdminUsuariosComponent } from './admin-usuarios/admin-usuarios.component'
+import { AdminUsuariosComponent, AdministrarUsuariosDialog } from './admin-usuarios/admin-usuarios.component';
+import { CrearAlumnosComponent, CrearAlumnosDialog } from './crear-alumnos/crear-alumnos.component'
 
 @NgModule({
   imports: [
@@ -21,9 +21,18 @@ import { AdminUsuariosComponent } from './admin-usuarios/admin-usuarios.componen
     AppMaterialModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([]),
-    NgbPopoverModule
+    RouterModule.forRoot([])
   ],
-  declarations: [TutorCentroComponent, AdminUsuariosComponent]
+  declarations: [TutorCentroComponent,
+    AdminUsuariosComponent,
+    AdministrarUsuariosDialog,
+    CrearAlumnosComponent,
+    CrearAlumnosDialog],
+  entryComponents: [AdminUsuariosComponent,
+    AdministrarUsuariosDialog,
+    CrearAlumnosComponent,
+    CrearAlumnosDialog],
+  providers: [AdminUsuariosComponent,
+    CrearAlumnosComponent]
 })
 export class TutorCentroModule { }

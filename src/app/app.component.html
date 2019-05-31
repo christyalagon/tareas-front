@@ -1,9 +1,11 @@
 <div>
   <header>
     <mat-toolbar color="primary">
-      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
       <span style="text-align: center" class="tituloCentrado">
         <span>{{ title }}</span>
+      </span>
+      <span *ngIf="loggedIn()">
+        <button class="btn btn-light" (click)="cerrarSesion()">Cerrar sesión</button>
       </span>
     </mat-toolbar>
   </header>

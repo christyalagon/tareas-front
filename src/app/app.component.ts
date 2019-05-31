@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TestService } from './services/test/test.service';
 import { Test } from './services/test/test';
 import { MatTableDataSource } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ export class AppComponent implements OnInit {
   datos: Test[]
   displayedColumns: string[] = ['descripcion', 'price']
   dataSource = new MatTableDataSource()
-  constructor(private service: TestService) {
+  constructor(private service: TestService,
+    private router: Router) {
   }
   ngOnInit() {
   }
@@ -35,5 +37,18 @@ export class AppComponent implements OnInit {
     this.service.addData(data).subscribe(data2 => {
       this.getDatos()
     })
+  }
+
+  loggedIn() {
+    if (sessionStorage.getItem('perfil') != null) {
+      return true
+    } else {
+      return false
+    }
+  }
+  cerrarSesion() {
+    sessionStorage.removeItem('perfil')
+    sessionStorage.removeItem('loginId')
+    this.router.navigate(['/login'])
   }
 }

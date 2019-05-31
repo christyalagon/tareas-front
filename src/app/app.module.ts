@@ -14,8 +14,10 @@ import { TestComponent } from './modules/test/test.component'
 import { TutorEmpresaModule } from './modules/tutor-empresa/tutor-empresa.module'
 import { TenantHttpInterceptor } from './services/tenant-interceptor'
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { TutorCentroModule } from './modules/tutor-centro/tutor-centro.module'
+import { MatPaginatorIntl } from '@angular/material';
+import { getSpanishPaginatorIntl } from './spanish-paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +42,8 @@ import { TutorCentroModule } from './modules/tutor-centro/tutor-centro.module'
       provide: HTTP_INTERCEPTORS,
       useClass: TenantHttpInterceptor,
       multi: true
-    }],
+    },
+    { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

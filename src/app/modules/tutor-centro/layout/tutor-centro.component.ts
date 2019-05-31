@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { UsuariosService } from 'src/app/services/usuarios/usuarios.service'
+import { CrearAlumnosComponent } from '../crear-alumnos/crear-alumnos.component'
+import { AdminUsuariosComponent } from '../admin-usuarios/admin-usuarios.component'
 
 @Component({
   selector: 'app-tutor-centro',
@@ -8,14 +10,20 @@ import { UsuariosService } from 'src/app/services/usuarios/usuarios.service'
 })
 export class TutorCentroComponent implements OnInit {
 
-  constructor(private usuarioService: UsuariosService) { }
+  constructor(private usuarioService: UsuariosService,
+    private crearAlumDialog: CrearAlumnosComponent,
+    private adminUsersDialog: AdminUsuariosComponent) { }
 
   ngOnInit() {
-    console.log(this.usuarioService.usuariosFusionados().subscribe(
-      data => {
-        console.log(data)
-      }
-    ))
+  }
+
+  crearAlumnos() {
+    this.crearAlumDialog.open().subscribe(result => {
+    })
+  }
+  adminUsers() {
+    this.adminUsersDialog.open().subscribe(result => {
+    })
   }
 
 }

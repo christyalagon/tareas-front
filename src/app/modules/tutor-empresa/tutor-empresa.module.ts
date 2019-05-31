@@ -13,8 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { EmpresaGuard } from '../auth/empresa.guard'
 import { AsignarTareasComponent, AsignarTareaDialog } from './asignar-tareas/asignar-tareas.component'
 import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap'
-import { PuntuarTareasComponent, PuntuarTareaDialog } from './puntuar-tareas/puntuar-tareas.component';
-import { ListarNotasComponent } from './listar-notas/listar-notas.component'
+import { PuntuarTareasComponent, PuntuarTareaDialog } from './puntuar-tareas/puntuar-tareas.component'
+import { ListarNotasComponent, ListarNotasDialog } from './listar-notas/listar-notas.component'
 
 @NgModule({
   imports: [
@@ -30,10 +30,10 @@ import { ListarNotasComponent } from './listar-notas/listar-notas.component'
     NgbPopoverModule
   ],
   declarations: [HomeComponent, CrearTareaComponent, CrearTareaDialog, AsignarTareasComponent,
-    AsignarTareaDialog, PuntuarTareaDialog, PuntuarTareasComponent, ListarNotasComponent],
+    AsignarTareaDialog, PuntuarTareaDialog, PuntuarTareasComponent, ListarNotasComponent, ListarNotasDialog],
   entryComponents: [CrearTareaComponent, CrearTareaDialog, AsignarTareasComponent,
-    AsignarTareaDialog, PuntuarTareasComponent, PuntuarTareaDialog],
-  exports: [CrearTareaComponent, AsignarTareasComponent, PuntuarTareasComponent],
-  providers: [ProfesorGuard, CrearTareaComponent, EmpresaGuard, AsignarTareasComponent, PuntuarTareasComponent]
+    AsignarTareaDialog, PuntuarTareasComponent, PuntuarTareaDialog, ListarNotasComponent, ListarNotasDialog],
+  exports: [CrearTareaComponent, AsignarTareasComponent, PuntuarTareasComponent, ListarNotasComponent],
+  providers: [ProfesorGuard, CrearTareaComponent, EmpresaGuard, AsignarTareasComponent, PuntuarTareasComponent, ListarNotasComponent]
 })
 export class TutorEmpresaModule { }
