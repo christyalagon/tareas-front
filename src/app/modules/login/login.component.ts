@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { LoginService } from 'src/app/services/login/login.service'
 import { Router } from '@angular/router'
 import { User } from 'src/app/services/login/user'
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material'
 
 @Component({
   selector: 'app-login',
@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
           if (data) {
             sessionStorage.setItem('loginId', user.id.toString())
             sessionStorage.setItem('perfil', user.perfil)
+            this.snackBar.open('CORRECTO', 'Login correcto', { duration: 8000, verticalPosition: 'top' })
             if (user.perfil === '1') {
 
               this.router.navigate(['/tutor-empresa'])
