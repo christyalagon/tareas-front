@@ -101,7 +101,7 @@ export class CrearAlumnosComponent {
 
   public open(): Observable<any> {
     const dialogRef = this.dialog.open(CrearAlumnosDialog, {
-      width: '700px',
+      width: '900px',
       height: '600px',
       maxHeight: '100vh'
     })

@@ -14,6 +14,9 @@
             Descripción
           </th>
           <th>
+            Proyecto
+          </th>
+          <th>
             Alumno
           </th>
         </tr>
@@ -22,6 +25,7 @@
         <tr class="fila" *ngFor="let tarea of tareas">
           <td>{{tarea.codigoTarea}}</td>
           <td>{{tarea.descripcion}}</td>
+          <td>{{tarea.nombreProyecto}}</td>
           <td>
             <select class="custom-select" (change)="selectAlumno($event.target.value, tarea)">
               <option value="null" selected="selected">Asignar alumno..</option>
@@ -38,13 +42,13 @@
       <h4>Todas las tareas están asignadas..</h4>
     </div>
   </ng-template>
-  <div class="col-6 d-flex ml-auto mr-auto mt-2 p-5" *ngIf="tareas.length > 0">
-    <button class="btn btn-primary w-100" (click)="guardar()">GUARDAR</button>
+  <div class="col-sm-12 col-md-6 d-flex ml-auto mr-auto mt-2 p-5" *ngIf="tareas.length > 0">
+    <button class="btn btn-outline-dark w-100" (click)="guardar()">GUARDAR</button>
   </div>
-  <div class="col-6 d-flex ml-auto mr-auto mt-2 p-5" *ngIf="tareas.length === 0">
-    <button class="btn btn-primary w-100" (click)="crearTareas()">CREAR TAREAS</button>
+  <div class="col-sm-12 col-md-6 d-flex ml-auto mr-auto mt-2 p-5" *ngIf="tareas.length === 0">
+    <button class="btn btn-outline-dark w-100" (click)="crearTareas()">CREAR TAREAS</button>
   </div>
-  <div class="col-6 d-flex ml-auto mr-auto mt-2 p-5">
-    <button class="btn btn-primary w-100" (click)="onNoClick()">CANCELAR</button>
+  <div class="col-sm-12 col-md-6 d-flex ml-auto mr-auto mt-2 p-5">
+    <button class="btn btn-outline-dark w-100" (click)="onNoClick()">CANCELAR</button>
   </div>
 </div>

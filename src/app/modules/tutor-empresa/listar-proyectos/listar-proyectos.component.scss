@@ -1,18 +1,21 @@
-mat-form-field {
-  width: 100%;
-}
+table {
+  width: 95%;
 
-.cancelar {
-  padding-right: 3em;
-}
+  th,
+  td {
+    text-align: center;
+  }
 
-.mat-row:hover {
-  cursor: pointer;
-  background-color: rgb(202, 240, 202);
-}
+  tr.proyectos:hover {
+    td {
+      background-color: rgb(202, 240, 202);
+      cursor: pointer;
+    }
+  }
 
-.tituloSecundario{
-    color: rgb(194, 191, 191);
+  tr:active {
+    border: 1px solid #c2bcbc;
+  }
 }
 
 .mat-paginator-container {

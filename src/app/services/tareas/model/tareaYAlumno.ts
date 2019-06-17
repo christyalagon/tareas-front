@@ -4,6 +4,7 @@ export class TareaYAlumno {
     codigoTarea: string
     descripcion: string
     nota: number
+    nombreProyecto: string
     constructor() {
         this.nota = null
     }

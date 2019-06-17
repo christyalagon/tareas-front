@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router'
 import { TutorCentroComponent } from './layout/tutor-centro.component'
 import { AdminUsuariosComponent, AdministrarUsuariosDialog } from './admin-usuarios/admin-usuarios.component';
 import { CrearAlumnosComponent, CrearAlumnosDialog } from './crear-alumnos/crear-alumnos.component'
+import { ListarTareasComponent, ListarTareasDialog } from './listar-tareas/listar-tareas.component';
 
 @NgModule({
   imports: [
@@ -27,12 +28,17 @@ import { CrearAlumnosComponent, CrearAlumnosDialog } from './crear-alumnos/crear
     AdminUsuariosComponent,
     AdministrarUsuariosDialog,
     CrearAlumnosComponent,
-    CrearAlumnosDialog],
+    CrearAlumnosDialog,
+    ListarTareasComponent,
+    ListarTareasDialog],
   entryComponents: [AdminUsuariosComponent,
     AdministrarUsuariosDialog,
     CrearAlumnosComponent,
-    CrearAlumnosDialog],
+    CrearAlumnosDialog,
+    ListarTareasComponent,
+    ListarTareasDialog],
   providers: [AdminUsuariosComponent,
-    CrearAlumnosComponent]
+    CrearAlumnosComponent,
+    ListarTareasComponent]
 })
 export class TutorCentroModule { }

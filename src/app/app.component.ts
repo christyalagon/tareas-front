@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Tareas'
+  title = 'Control de Tareas'
   datos: Test[]
   displayedColumns: string[] = ['descripcion', 'price']
   dataSource = new MatTableDataSource()

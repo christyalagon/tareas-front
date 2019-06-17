@@ -41,7 +41,7 @@ export class ListarNotasComponent {
 
   public open(): Observable<any> {
     const dialogRef = this.dialog.open(ListarNotasDialog, {
-      width: '700px',
+      width: '900px',
       height: '600px',
       maxHeight: '100vh'
     })

@@ -16,7 +16,7 @@ import { CrearTareaComponent } from '../crear-tarea/crear-tarea.component'
 // tslint:disable-next-line:component-class-suffix
 export class AsignarTareaDialog implements OnInit {
   alumnos: Alumno[]
-  tareas: Tareas[] = []
+  tareas: TareaYAlumno[] = []
   tarea: Tareas = new Tareas
   tareasModificadas: TareaYAlumno[] = []
   codigoAlumno: string = null
@@ -41,15 +41,16 @@ export class AsignarTareaDialog implements OnInit {
     this.dialogRef.close()
   }
 
-  selectAlumno(codigoAlumno, tarea: Tareas) {
+  selectAlumno(codigoAlumno, tarea: TareaYAlumno) {
     if (codigoAlumno !== 'null') {
       const modTarea: TareaYAlumno = new TareaYAlumno
-      modTarea.idTarea = tarea.id
-      modTarea.codigoTarea = tarea.codigoTarea
-      modTarea.descripcion = tarea.descripcion
-      modTarea.codigoAlumno = codigoAlumno
+      // modTarea.idTarea = tarea.id
+      // modTarea.codigoTarea = tarea.codigoTarea
+      // modTarea.descripcion = tarea.descripcion
+      // modTarea.codigoAlumno = codigoAlumno
+      tarea.codigoAlumno = codigoAlumno
       this.tareasModificadas = this.tareasModificadas.filter(x => x.codigoTarea !== tarea.codigoTarea)
-      this.tareasModificadas.push(modTarea)
+      this.tareasModificadas.push(tarea)
     } else {
       this.tareasModificadas = this.tareasModificadas.filter(x => x.codigoTarea !== tarea.codigoTarea)
     }
@@ -85,7 +86,7 @@ export class AsignarTareasComponent {
 
   public open(): Observable<any> {
     const dialogRef = this.dialog.open(AsignarTareaDialog, {
-      width: '700px',
+      width: '900px',
       height: '600px',
       maxHeight: '100vh'
     })

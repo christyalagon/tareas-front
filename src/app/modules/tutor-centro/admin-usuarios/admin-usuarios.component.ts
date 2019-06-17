@@ -131,7 +131,7 @@ export class AdminUsuariosComponent {
 
   public open(): Observable<any> {
     const dialogRef = this.dialog.open(AdministrarUsuariosDialog, {
-      width: '700px',
+      width: '900px',
       height: '600px',
       maxHeight: '100vh'
     })

@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core'
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material'
+import { Component, OnInit, Inject, ViewChild } from '@angular/core'
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatTableDataSource, MatPaginator } from '@angular/material'
 import { Observable } from 'rxjs'
 import { AlumnoService } from 'src/app/services/alumnos/alumno.service'
 import { Alumno } from 'src/app/services/alumnos/model/alumno'
@@ -8,6 +8,8 @@ import { TareasService } from 'src/app/services/tareas/tareas.service'
 import { Tareas } from 'src/app/services/tareas/model/tareas'
 import { TareaYAlumno } from 'src/app/services/tareas/model/tareaYAlumno'
 import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms'
+import { Proyecto } from 'src/app/services/proyectos/model/proyecto'
+import { ProyectosService } from 'src/app/services/proyectos/proyectos.service'
 
 @Component({
   selector: 'app-crear-tarea',
@@ -16,29 +18,42 @@ import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular
 })
 // tslint:disable-next-line:component-class-suffix
 export class CrearTareaDialog implements OnInit {
+  @ViewChild('proyectosPaginator') paginator: MatPaginator
   alumnos: Alumno[]
   tarea: Tareas = new Tareas
   codigoAlumno: string = null
   tareaForm: FormGroup
   cerrar: Boolean = false
+  nombreProyectoSeleccionado: string
+
+  displayedColumns: string[] = ['Nombre', 'Descripcion']
+  dataSource = new MatTableDataSource()
+  crearTarea: Boolean = false
+  proyectos: Proyecto[]
   constructor(
     public dialogRef: MatDialogRef<CrearTareaDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public alumnosService: AlumnoService,
     public tareasService: TareasService,
+    public proyectoService: ProyectosService,
     private formBuilder: FormBuilder,
     public snackBar: MatSnackBar) { }
   ngOnInit() {
     // tslint:disable-next-line:radix
     const tutorId = parseInt(sessionStorage.getItem('loginId'))
     this.createFormGroup()
-    this.alumnosService.listadoPorTutor(tutorId).subscribe(data => {
-      this.alumnos = data
-      console.log(this.alumnos)
-    })
+    this.proyectoService.listarPorTutor().subscribe(
+      data => {
+        this.proyectos = data
+        this.dataSource = new MatTableDataSource(this.proyectos)
+        this.dataSource.paginator = this.paginator
+        this.alumnosService.listadoPorTutor(tutorId).subscribe(data2 => {
+          this.alumnos = data2
+        })
+      }
+    )
   }
   onNoClick(): void {
-    console.log('close')
     this.dialogRef.close()
   }
   createFormGroup() {
@@ -49,14 +64,20 @@ export class CrearTareaDialog implements OnInit {
     })
   }
 
+  pasarACrearTarea(proyecto: Proyecto) {
+    this.nombreProyectoSeleccionado = proyecto.nombre
+    this.crearTarea = true
+  }
+
   submitForm(formData: any, formDirective: FormGroupDirective, cerrar?: boolean) {
     console.log('cerrar')
     console.log(cerrar)
     if (!this.tareaForm.invalid) {
       if (this.tareaForm.value.CodigoAlumno == null) {
-        const tareaNueva: Tareas = new Tareas
+        const tareaNueva: TareaYAlumno = new TareaYAlumno
         tareaNueva.codigoTarea = this.tareaForm.value.CodigoTarea
         tareaNueva.descripcion = this.tareaForm.value.Descripcion
+        tareaNueva.nombreProyecto = this.nombreProyectoSeleccionado
         this.tareasService.addTareaSinAlumno(tareaNueva).subscribe(data => {
           this.snackBar.open('CORRECTO', 'Tarea creada con éxito', { duration: 8000, verticalPosition: 'top' })
           if (cerrar) {
@@ -77,6 +98,7 @@ export class CrearTareaDialog implements OnInit {
         tareaNueva.codigoTarea = this.tareaForm.value.CodigoTarea
         tareaNueva.descripcion = this.tareaForm.value.Descripcion
         tareaNueva.codigoAlumno = this.tareaForm.value.CodigoAlumno
+        tareaNueva.nombreProyecto = this.nombreProyectoSeleccionado
         this.tareasService.addTareaConAlumno(tareaNueva).subscribe(data => {
           this.snackBar.open('CORRECTO', 'Tarea creada con éxito', { duration: 8000, verticalPosition: 'top' })
           if (cerrar) {
@@ -107,7 +129,7 @@ export class CrearTareaComponent {
   public open(): Observable<any> {
     const parametro = false
     const dialogRef = this.dialog.open(CrearTareaDialog, {
-      width: '700px',
+      width: '900px',
       maxHeight: '100vh',
     })
     return dialogRef.afterClosed()
